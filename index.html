@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark">S</span><span>Student<span class="muted">Desk</span></span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <a class="nav-item active" href="#">▦ <span>Dashboard</span></a>
+      <div class="sidebar-note">
+        <strong>Student records</strong>
+        <p>Manage your student information in one place.</p>
+      </div>
+      <div class="sidebar-footer">StudentDesk · Portfolio project</div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">OVERVIEW</p>
+          <h1>Student dashboard</h1>
+          <p class="subheading">Manage, search and organize student records.</p>
+        </div>
+        <button class="primary-btn" id="addStudentBtn">＋ Add student</button>
+      </header>
+
+      <section class="stats-grid" aria-label="Student statistics">
+        <article class="stat-card"><span class="stat-label">Total students</span><strong id="totalCount">0</strong><span class="stat-hint">All registered records</span></article>
+        <article class="stat-card"><span class="stat-label">Active students</span><strong id="activeCount">0</strong><span class="stat-hint">Currently active</span></article>
+        <article class="stat-card"><span class="stat-label">Average mark</span><strong id="averageMark">—</strong><span class="stat-hint">Across all students</span></article>
+      </section>
+
+      <section class="panel">
+        <div class="panel-heading">
+          <div><h2>Student records</h2><p>View and maintain your student directory.</p></div>
+        </div>
+        <div class="toolbar">
+          <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search by name, email or course..." aria-label="Search students"></label>
+          <select id="courseFilter" aria-label="Filter by course"><option value="">All courses</option></select>
+          <select id="statusFilter" aria-label="Filter by status"><option value="">All statuses</option><option>Active</option><option>Inactive</option></select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>STUDENT</th><th>COURSE</th><th>YEAR</th><th>MARKS</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+            <tbody id="studentTableBody"></tbody>
+          </table>
+          <div id="emptyState" class="empty-state" hidden>
+            <div class="empty-icon">⌕</div><strong>No students found</strong><p>Try changing your search or add a new student.</p>
+          </div>
+        </div>
+        <div class="table-footer"><span id="recordCount">Showing 0 records</span><span>Data saved in this browser</span></div>
+      </section>
+      <footer class="page-footer">Built with HTML, CSS, JavaScript and Local Storage.</footer>
+    </main>
+  </div>
+
+  <dialog id="studentDialog">
+    <form id="studentForm" method="dialog">
+      <div class="dialog-heading"><div><p class="eyebrow">STUDENT DETAILS</p><h2 id="dialogTitle">Add student</h2></div><button type="button" class="icon-btn" id="closeDialog" aria-label="Close">×</button></div>
+      <input type="hidden" id="studentId">
+      <label>Full name<input id="name" maxlength="60" required placeholder="e.g. Priya Sharma"></label>
+      <label>Email address<input id="email" type="email" maxlength="100" required placeholder="name@example.com"></label>
+      <div class="form-row">
+        <label>Course<input id="course" maxlength="40" required placeholder="e.g. CSE"></label>
+        <label>Year of study<select id="year" required><option value="">Select year</option><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+      </div>
+      <div class="form-row">
+        <label>Marks (0–100)<input id="marks" type="number" min="0" max="100" required placeholder="85"></label>
+        <label>Status<select id="status"><option>Active</option><option>Inactive</option></select></label>
+      </div>
+      <p id="formError" class="form-error" role="alert"></p>
+      <div class="dialog-actions"><button type="button" class="secondary-btn" id="cancelDialog">Cancel</button><button class="primary-btn" type="submit">Save student</button></div>
+    </form>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>
